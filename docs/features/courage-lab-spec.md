@@ -52,38 +52,44 @@ Se añadirá una sección en `agents.config.json` para definir los perfiles disp
         "id": "lina",
         "name": "Lina",
         "role": "Gerente",
-        "avatar": "/assets/profiles/lina.jpg"
+        "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces"
       },
       {
         "id": "herson",
         "name": "Herson",
         "role": "Desarrollador",
-        "avatar": "/assets/profiles/herson.jpg"
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=faces"
       },
       {
         "id": "maria",
         "name": "María",
         "role": "Directora de Recursos Humanos",
-        "avatar": "/assets/profiles/maria.jpg"
+        "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=faces"
       },
       {
         "id": "carlos",
         "name": "Carlos",
         "role": "Product Manager",
-        "avatar": "/assets/profiles/carlos.jpg"
+        "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=faces"
       }
-    ]
+    ],
+    "placeholder": "Escribe tu mensaje para iniciar el roleplay..."
   }
 }
 ```
 
+**Nota:** Las imágenes de avatar son URLs de Unsplash con fotos profesionales reales. Si una imagen falla al cargar, se muestra un icono de usuario como fallback.
+
 ### 3.2 Estructura de Perfiles
 
 Cada perfil debe incluir:
-- **id**: Identificador único (string)
-- **name**: Nombre de la persona (string)
-- **role**: Cargo/posición en la empresa (string) - Este es el campo crítico que se envía a n8n
-- **avatar**: URL de la imagen del perfil (string, opcional - puede usar placeholder si no hay imagen)
+- **id**: Identificador único (string) - ej: "lina", "herson"
+- **name**: Nombre de la persona (string) - ej: "Lina", "Herson"
+- **role**: Cargo/posición en la empresa (string) - Este es el campo crítico que se envía a n8n - ej: "Gerente", "Desarrollador"
+- **avatar**: URL de la imagen del perfil (string, opcional pero recomendado)
+  - **Implementación actual**: URLs de Unsplash con parámetros `w=400&h=400&fit=crop&crop=faces` para imágenes cuadradas de retratos
+  - Si no se proporciona o falla la carga, se muestra un icono User como fallback
+  - Ejemplo: `"https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces"`
 
 ## 4. Integración con n8n
 
@@ -113,23 +119,26 @@ POST /api/agent/courage-lab/execute
 
 ## 5. Componentes Técnicos
 
-### 5.1 Nuevos Componentes Necesarios
+### 5.1 Componentes Implementados
 
-1. **ProfileSelector Component**: 
-   - Muestra el carrusel de perfiles
+1. **ProfileSelector Component** (✅ IMPLEMENTADO): 
+   - Muestra grid de perfiles con imágenes reales
    - Maneja la selección del perfil
-   - Navegación entre perfiles
-   - Animaciones y transiciones
+   - Efectos hover con indicador "Seleccionar"
+   - Manejo de errores de imagen con fallback a icono User
+   - Diseño responsive con flex-wrap
 
-2. **Modificación de CourageLab.jsx**:
-   - Estado para el perfil seleccionado
-   - Renderizar ProfileSelector si no hay perfil seleccionado
-   - Renderizar ChatComponent cuando hay perfil seleccionado
-   - Pasar el role al ChatComponent para incluirlo en las peticiones
+2. **CourageLab.jsx** (✅ MODIFICADO):
+   - Estado `selectedProfile` para el perfil seleccionado
+   - Renderizado condicional: ProfileSelector si no hay perfil, ChatComponent si hay perfil
+   - Header del perfil seleccionado con imagen, nombre y cargo
+   - Botón "Cambiar perfil" para volver a la selección
+   - Pasa `selectedProfile` al ChatComponent
 
-3. **Modificación de ChatComponent**:
-   - Aceptar prop `selectedRole` o `profileRole`
-   - Incluir el role en el body de la petición POST
+3. **ChatComponent** (✅ MODIFICADO):
+   - Acepta prop `selectedProfile`
+   - Incluye `role` y `profile_name` en el body de cada petición POST
+   - Compatible con otros módulos que no usan perfiles (prop opcional)
 
 ## 6. Diseño Visual
 
@@ -142,10 +151,18 @@ POST /api/agent/courage-lab/execute
 
 ### 6.2 Colores y Estilos
 
-- Usar la paleta de colores de la aplicación (negro como primario)
-- Cards con sombras sutiles
-- Bordes redondeados para avatares
-- Tipografía clara y legible
+- **Paleta**: Negro (#000000) como color primario, blancos y grises (#FAFAFA, #F3F4F6)
+- **Cards de perfiles**: 
+  - Fondo blanco con borde gris (#E5E7EB) que se vuelve negro en hover
+  - Sombras sutiles que se intensifican en hover (`hover:shadow-xl`)
+  - Bordes redondeados (`rounded-xl`)
+- **Avatares**: 
+  - Circular (`rounded-full`) con tamaño 24x24 (96px) en el selector
+  - Ring/borde sutil que se intensifica en hover
+  - Imágenes reales desde Unsplash con fallback a icono User
+- **Tipografía**: Clara y legible, fuente semibold para nombres, texto normal para cargos
+- **Transiciones**: Suaves (`transition-all duration-300`) en hover y cambios de estado
+- **Responsive**: Grid con `flex-wrap` para adaptarse a diferentes tamaños de pantalla
 
 ## 7. Casos de Uso Típicos
 

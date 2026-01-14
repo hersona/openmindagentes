@@ -50,9 +50,13 @@ Página principal que actúa como portal/landing mejorado:
 ### 3.2 Modules (The 4 Pillars)
 Cada módulo es accesible por su ruta en el mismo servidor:
 
-1. **The Courage Lab (ruta: `/courage-lab`):** Roleplay interactivo para practicar conversaciones difíciles (feedback, despidos, crisis).
-   - Tipo: Chat
-   - Interfaz: ChatComponent con historial de conversaciones
+1. **The Courage Lab (ruta: `/courage-lab`):** Roleplay interactivo tipo juego para practicar conversaciones difíciles (feedback, despidos, crisis).
+   - Tipo: Chat con selección de perfil
+   - Interfaz: 
+     - Pantalla inicial: ProfileSelector con carrusel de perfiles (imágenes reales, nombres y cargos)
+     - Pantalla de chat: ChatComponent con header del perfil seleccionado
+   - Funcionalidad: El usuario selecciona un perfil de la empresa (ej: Lina - Gerente, Herson - Desarrollador) y practica conversaciones con ese perfil específico
+   - Configuración: Perfiles definidos en `agents.config.json` con nombre, cargo e imagen (URL de Unsplash)
 
 2. **The Culture Hunter (ruta: `/culture-hunter`):** Búsqueda de talento en LinkedIn analizando "Culture Fit" en lugar de solo keywords.
    - Tipo: Form
@@ -84,6 +88,7 @@ Cada módulo es accesible por su ruta en el mismo servidor:
 - El backend lee `agents.config.json` (raíz del proyecto), busca el agente por `id` en la ruta, y hace forwarding a n8n usando su `webhook_url`.
 - Los datos se envían a n8n que devuelve la respuesta procesada.
 - **Configurabilidad:** El sistema lee dinámicamente la configuración desde el archivo central `agents.config.json`.
+- **Courage Lab específico:** Cuando se envía un mensaje, se incluye el `role` (cargo) y `profile_name` del perfil seleccionado para que n8n adapte su comportamiento.
 
 ## 5. Authentication & Access
 - **Acceso público:** La plataforma es accesible públicamente sin requerir autenticación inicial (puede implementarse en el futuro).

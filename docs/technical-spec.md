@@ -61,7 +61,8 @@ El sistema consiste en un servidor backend único y un frontend único con routi
   - Agent Gateway (grid de módulos)
   - CTA final (sección persuasiva)
 - `AgentCard.jsx` - Card mejorada para cada módulo con icono destacado, descripción larga y efectos hover
-- `ChatComponent.jsx` - Para módulos tipo chat (Courage Lab, Interview Gym)
+- `ProfileSelector.jsx` - Componente para selección de perfiles en Courage Lab (carrusel con imágenes reales)
+- `ChatComponent.jsx` - Para módulos tipo chat (Courage Lab, Interview Gym). Acepta `selectedProfile` prop para incluir contexto del perfil
 - `FormComponent.jsx` - Para módulos tipo form (Culture Hunter)
 - `UploadComponent.jsx` - Para módulos tipo upload (Growth Mapper)
 - Componentes UI (Shadcn-style): Button, Card, Input, Textarea, Select
@@ -75,7 +76,10 @@ El sistema consiste en un servidor backend único y un frontend único con routi
 
 ### Chat Agents (Courage Lab, Interview Gym)
 - Payload JSON con campos técnicos apropiados según el tipo de interacción.
-- Ejemplo estructura: `{ "message": "texto del usuario", "context": {...} }` (estructura específica a definir según cada taller).
+- **Courage Lab**: Estructura: `{ "message": "texto del usuario", "role": "Gerente", "profile_name": "Lina" }`
+  - El campo `role` (cargo) se envía desde el perfil seleccionado y permite a n8n adaptar el comportamiento del agente
+  - El campo `profile_name` (nombre del perfil) se incluye como contexto adicional
+- **Interview Gym**: Estructura: `{ "message": "texto del usuario", "context": {...} }` (estructura específica a definir según cada taller).
 
 ### Form Agents (Culture Hunter)
 - Todos los campos del formulario se envían en una sola petición POST.
@@ -111,6 +115,7 @@ El sistema consiste en un servidor backend único y un frontend único con routi
           textarea.jsx
           select.jsx
         AgentCard.jsx                    # Card mejorada para módulos
+        ProfileSelector.jsx              # Selector de perfiles para Courage Lab
         ChatComponent.jsx                # Componente de chat
         FormComponent.jsx                # Componente de formulario
         UploadComponent.jsx              # Componente de upload
