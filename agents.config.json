@@ -15,7 +15,7 @@
       "type": "chat",
       "icon": "MessageSquare",
       "route": "/courage-lab",
-      "webhook_url": "http://52.32.104.107:5678/webhook-test/0bfe0d3e-78c3-4c96-9b83-a2aca605b1fc",
+      "webhook_url": "http://52.32.104.107:5678/webhook-test/87a0bd5b-1f3b-47e2-ab46-76a5658a9f88",
       "description": "Simulador de conversaciones difíciles para líderes.",
       "long_description": "Entrena tu capacidad de dar feedback, gestionar crisis y comunicar decisiones difíciles en un entorno seguro.",
       "config": {
