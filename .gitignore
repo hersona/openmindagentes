@@ -19,6 +19,10 @@ build/
 *.swo
 *~
 
+# Cursor (keep rules, ignore other cache files)
+.cursor/
+!.cursor/rules/
+
 # OS
 .DS_Store
 Thumbs.db
