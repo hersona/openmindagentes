@@ -1,0 +1,96 @@
+{
+  "company_info": {
+    "name": "Openmind Global",
+    "tagline": "Human Talent Powered by AI",
+    "description": "Consultora líder en transformación cultural y talleres de crecimiento exponencial.",
+    "branding": {
+      "primary_color": "#000000",
+      "logo_url": "/assets/logo-openmind.png"
+    }
+  },
+  "agents": [
+    {
+      "id": "courage-lab",
+      "name": "The Courage Lab",
+      "type": "chat",
+      "icon": "MessageSquare",
+      "route": "/courage-lab",
+      "webhook_url": "http://52.32.104.107:5678/webhook-test/0bfe0d3e-78c3-4c96-9b83-a2aca605b1fc",
+      "description": "Simulador de conversaciones difíciles para líderes.",
+      "long_description": "Entrena tu capacidad de dar feedback, gestionar crisis y comunicar decisiones difíciles en un entorno seguro.",
+      "config": {
+        "profiles": [
+          {
+            "id": "lina",
+            "name": "Lina",
+            "role": "Gerente",
+            "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces"
+          },
+          {
+            "id": "herson",
+            "name": "Herson",
+            "role": "Desarrollador",
+            "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=faces"
+          },
+          {
+            "id": "maria",
+            "name": "María",
+            "role": "Directora de Recursos Humanos",
+            "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=faces"
+          },
+          {
+            "id": "carlos",
+            "name": "Carlos",
+            "role": "Product Manager",
+            "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=faces"
+          }
+        ],
+        "placeholder": "Escribe tu mensaje para iniciar el roleplay..."
+      }
+    },
+    {
+      "id": "culture-hunter",
+      "name": "The Culture Hunter",
+      "type": "form",
+      "icon": "Search",
+      "route": "/culture-hunter",
+      "webhook_url": "http://52.32.104.107:5678/webhook-test/0bfe0d3e-78c3-4c96-9b83-a2aca605b1fc",
+      "description": "Buscador de talento basado en ADN cultural.",
+      "long_description": "Encuentra candidatos que no solo tengan las habilidades técnicas, sino que compartan los valores de Openmind.",
+      "config": {
+        "fields": [
+          { "name": "role", "label": "Cargo", "type": "text" },
+          { "name": "culture_fit", "label": "Valores buscados", "type": "select", "options": ["Innovación", "Empatía", "Resultados"] }
+        ]
+      }
+    },
+    {
+      "id": "growth-mapper",
+      "name": "Growth Mapper",
+      "type": "upload",
+      "icon": "FileText",
+      "route": "/growth-mapper",
+      "webhook_url": "http://52.32.104.107:5678/webhook-test/0bfe0d3e-78c3-4c96-9b83-a2aca605b1fc",
+      "description": "Análisis de CV vs Plan de Carrera.",
+      "long_description": "Sube un CV y recibe un diagnóstico de brechas de habilidades y recomendaciones de talleres de crecimiento.",
+      "config": {
+        "allowed_types": [".pdf", ".docx"],
+        "max_size_mb": 5
+      }
+    },
+    {
+      "id": "interview-gym",
+      "name": "The Interview Gym",
+      "type": "chat",
+      "icon": "Users",
+      "route": "/interview-gym",
+      "webhook_url": "http://52.32.104.107:5678/webhook-test/0bfe0d3e-78c3-4c96-9b83-a2aca605b1fc",
+      "description": "Entrenamiento de entrevistas por competencias.",
+      "long_description": "Practica tus respuestas usando el método STAR ante un entrevistador de IA de alta presión.",
+      "config": {
+        "levels": ["Junior", "Mid", "Senior", "C-Level"],
+        "placeholder": "La IA hará la primera pregunta..."
+      }
+    }
+  ]
+}
