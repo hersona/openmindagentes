@@ -1,0 +1,46 @@
+---
+description: Project architecture and technical guidelines
+alwaysApply: true
+---
+
+# Architecture Guidelines
+
+## System Architecture
+
+This is a **unified server system** with:
+- Single backend server (Express) in `backend/`
+- Single frontend application (React + Vite) in `frontend/`
+- Central configuration file: `agents.config.json` at root
+- All modules share the same backend and frontend
+
+## Backend Structure
+
+- **File**: `backend/server.js`
+- **Endpoints**:
+  - `GET /api/agents`: Returns list of all agents from `agents.config.json`
+  - `POST /api/agent/:id/execute`: Executes agent, forwards to n8n webhook
+- **Timeout**: 30 seconds for n8n requests
+- **CORS**: Enabled for frontend communication
+
+## Frontend Structure
+
+- **Framework**: React 18 + Vite + React Router
+- **Styling**: Tailwind CSS with minimalist black/white theme
+- **UI Components**: Shadcn-style components in `frontend/src/components/ui/`
+- **Routing**: Client-side routing with React Router
+- **Pages**: Located in `frontend/src/pages/`
+
+## Module Types
+
+1. **Chat modules**: Use `ChatComponent` (e.g., Courage Lab, Interview Gym)
+2. **Form modules**: Use `FormComponent` (e.g., Culture Hunter)
+3. **Upload modules**: Use `UploadComponent` (e.g., Growth Mapper)
+
+## Design System
+
+- **Colors**: Black (#000000) and white (#FFFFFF) primary palette
+- **Spacing**: Generous spacing (py-16, py-24, py-32)
+- **Typography**: Clean, legible system fonts
+- **Transitions**: Smooth transitions (duration-300)
+- **Borders**: Subtle rounded corners
+- **Shadows**: Minimal and subtle

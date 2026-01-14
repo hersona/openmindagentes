@@ -1,0 +1,53 @@
+---
+description: Always include project specs and documentation in context
+alwaysApply: true
+---
+
+# Project Specifications Context
+
+This project follows detailed specifications that must always be considered when working on any code changes or features.
+
+## Documentation Structure
+
+All project specifications are located in the `docs/` folder:
+
+- **docs/functional-spec.md**: Functional specification of the entire platform
+  - Project vision and architecture
+  - Module descriptions and user flows
+  - Frontend-backend communication patterns
+  - API endpoints and data flow
+
+- **docs/technical-spec.md**: Technical specification
+  - Tech stack (React + Vite, Node.js + Express, Tailwind CSS)
+  - Architecture details (unified server system)
+  - Component structure
+  - Payload structures by agent type
+  - Design system guidelines
+
+- **docs/features/**: Module-specific specifications
+  - **docs/features/courage-lab-spec.md**: The Courage Lab module specification
+    - Profile selection system
+    - Integration with n8n
+    - Component architecture
+    - Visual design guidelines
+
+## Key Principles
+
+1. **Always reference the specs** before making changes to ensure consistency
+2. **Follow the architecture**: Unified server system with centralized configuration
+3. **Respect the design system**: Minimalist Apple-style design (black/white palette)
+4. **Check module specs**: When working on a specific module, review its spec in `docs/features/`
+5. **Maintain consistency**: Follow patterns established in the specs
+
+## Configuration Files
+
+- **agents.config.json**: Central configuration for all modules/agents
+- All module configs are defined here, including profiles, webhook URLs, etc.
+
+## Important Patterns
+
+- Backend: Single Express server in `backend/server.js`
+- Frontend: Single React app with React Router in `frontend/src/`
+- API: `GET /api/agents` and `POST /api/agent/:id/execute`
+- Configuration: Centralized in `agents.config.json` at root
+- Design: Tailwind CSS with black/white minimalist theme
